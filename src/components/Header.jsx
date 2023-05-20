@@ -3,31 +3,38 @@ import styled from "styled-components"
 import logo from '../img/logo.svg'
 
 const Container = styled.div`
-    width: 30px; 
-    height: 20px;
+    width: 3.5%; 
+    height: 1.5vw;
     display: flex;
     flex-direction: column; 
     justify-content: space-between;
+    min-width: 40px;
+    min-height: 18px;
 `
 
 const Line = styled.span`
-    width: 30px;
+    width: 100%;
     display: block;
-    height: 3px;
-    background-color: #fff;
+    height: 14%;
+    background-color: #FFFFFF;
 `
 
 const Wrapper = styled.section`
     display: flex;
     justify-content: space-between;
-    padding: 50px;
+    padding: calc(20px + 1%);
     align-items: center;
+`
+
+const Logo = styled.img`
+    width: 3.5%;
+    min-width: 40px;
 `
 
 function Header() {
     return (
         <Wrapper>
-            <img src={logo} alt="AO Performance" />
+            <Logo src={logo} alt="AO Performance"></Logo>
             <Container>
                 <Line></Line>
                 <Line></Line>
