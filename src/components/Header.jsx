@@ -10,6 +10,7 @@ const Container = styled.div`
     justify-content: space-between;
     min-width: 40px;
     min-height: 18px;
+    cursor: pointer;
 `
 
 const Line = styled.span`
@@ -35,7 +36,7 @@ function Header() {
     return (
         <Wrapper>
             <Logo src={logo} alt="AO Performance"></Logo>
-            <Container>
+            <Container id="burger">
                 <Line></Line>
                 <Line></Line>
                 <Line></Line>
