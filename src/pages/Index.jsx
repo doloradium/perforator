@@ -236,6 +236,7 @@ const FieldsContainer = styled.div`
 const FieldsItem = styled.div`
     min-width: 25%;
     position: relative;
+    overflow: hidden;
     @media screen and (max-width: 768px) {
         min-width: 60%;
         &:first-child {
@@ -249,35 +250,27 @@ const FieldsItem = styled.div`
 
 const FieldsAnimation = styled.div`
     position: absolute;
-    background: linear-gradient(#be264c7d, #be264c33);
+    background: linear-gradient(#27151A, #121212);
     text-align: center;
-    width: 100%;
     height: 100%;
+    width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: -2.2%;
-    transform: translate(-1000%, 0);
-    transition: 0.5s;
+    top: 0;
+    transform: translate(-100%, 0);
+    transition: 0.8s;
     border: 2px solid #BE264C;
     box-sizing: border-box;
     cursor: default;
     ${FieldsItem}:hover & {
         transform: translate(0, 0);
-        transition: 0.5s;
+        transition: 0.8s;
+        width: 100%;
     }
     @media screen and (max-width: 768px) {
         display: none;
     }
-`
-
-const FieldsSubtext = styled.p`
-    font-size: 2vw;
-    text-align: center;
-    width: 60%;
-    color: #121212;
-    cursor: default;
-    text-shadow: 1px 0 #BE264C, -1px 0 #BE264C, 0 1px #BE264C, 0 -1px #BE264C, 1px 1px #BE264C, -1px -1px #BE264C, 1px -1px #BE264C, -1px 1px #BE264C;
 `
 
 const FieldsNumber = styled.div`
@@ -286,6 +279,7 @@ const FieldsNumber = styled.div`
     text-align: center;
     font-size: 20vw;
     margin: auto;
+    cursor: default;
     display: block;
     text-shadow: 1px 0 #FFFFFF, -1px 0 #FFFFFF, 0 1px #FFFFFF, 0 -1px #FFFFFF, 1px 1px #FFFFFF, -1px -1px #FFFFFF, 1px -1px #FFFFFF, -1px 1px #FFFFFF;
     @media screen and (max-width: 768px) {
@@ -301,8 +295,20 @@ const FieldsText = styled.p`
     top: 40%;
     left: 50%;
     position: absolute;
+    transition: 0.2s;
+    cursor: default;
     transform: translate(-50%, -50%);
+    ${FieldsItem}:hover & {
+        z-index: 100;
+        transition: 0.2s;
+        color: #000000;
+        text-shadow: 1px 0 #BE264C, -1px 0 #BE264C, 0 1px #BE264C, 0 -1px #BE264C, 1px 1px #BE264C, -1px -1px #BE264C, 1px -1px #BE264C, -1px 1px #BE264C;
+    }
     @media screen and (max-width: 768px) {
+        ${FieldsItem}:hover & {
+            color: #BE264C;
+            text-shadow: none;
+        }
         font-size: 30px;
         white-space: normal; 
     }
@@ -321,15 +327,17 @@ const BestDescription = styled.div`
     transition: 0.5s;
     position: absolute;
     z-index: 100;
-    background-color: #BE264C87;
+    background-color: #BE264C80;
     top: 0;
     left: 0;
     height: 85.4%;
     padding: 10%;
+    width: 65%;
     transform: translate(-100%, 0);
     @media screen and (max-width: 600px) {
         position: relative;
-        background-color: #ffffff04;
+        width: 100%;
+        background-color: #FFFFFF00;
         transform: translate(0, 0);
         transition: 0.1s;
         opacity: 0;
@@ -350,8 +358,10 @@ const BestName = styled.p`
 const BestParagraph = styled.p`
     color: #FFFFFF;
     font-size: 1.5vw;
+    margin-bottom: 100%;
     @media screen and (max-width: 600px) {
         font-size: inherit;
+        margin-bottom: 5%;
     }
 `
 
@@ -396,6 +406,23 @@ const FeedbackItem = styled.div`
     border: 2px solid #BE264C;
     padding: 8% 8% 8%;
     position: relative;
+    cursor: default;
+`
+
+const FeedbackBackground = styled.div`
+    background: linear-gradient(#27151A, #121212);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 50;
+    transition: 0.3s;
+    ${FeedbackItem}:hover & {
+        opacity: 1;
+        transition: 0.3s;
+    }
 `
 
 const Commas = styled.img`
@@ -403,6 +430,7 @@ const Commas = styled.img`
     top: -11%;
     right: 0;
     width: 21%;
+    z-index: 100;
 `
 
 const FeedbackText = styled.p`
@@ -410,6 +438,8 @@ const FeedbackText = styled.p`
     margin-bottom: 17%;
     font-size: calc(14px + 0.5vw);
     word-break: break-word;
+    z-index: 100;
+    position: relative;
     @media screen and (max-width: 600px) {
         font-size: calc(10px + 1.5vw);
     }
@@ -417,6 +447,8 @@ const FeedbackText = styled.p`
 
 const FeedbackStars = styled.div`
     margin-bottom: 2%;
+    z-index: 100;
+    position: relative;
 `
 
 const Star = styled.img`
@@ -428,6 +460,8 @@ const FeedbackName = styled.div`
     color: #FFFFFF;
     font-weight: 700;
     margin-bottom: 2%;
+    z-index: 100;
+    position: relative;
     font-size: calc(14px + 0.5vw);
     @media screen and (max-width: 600px) {
         font-size: calc(10px + 1.5vw);
@@ -437,6 +471,8 @@ const FeedbackName = styled.div`
 const FeedbackOccupation = styled.div`
     color: #FFFFFF;
     font-size: calc(14px + 0.5vw);
+    z-index: 100;
+    position: relative;
     @media screen and (max-width: 600px) {
         font-size: calc(10px + 1.5vw);
     }
@@ -465,7 +501,6 @@ const ReadyContainer = styled.div`
     height: 26vw;
     @media screen and (max-width: 600px) {
         height: auto;
-        background-color: #BE264C;
         height: 70vw;
     }
 `
@@ -501,9 +536,7 @@ const ReadyBackground = styled.p`
     transition: 0.5s;
     text-shadow: 1px 0 #656565, -1px 0 #656565, 0 1px #656565, 0 -1px #656565, 1px 1px #656565, -1px -1px #656565, 1px -1px #656565, -1px 1px #656565;
     @media screen and (max-width: 600px) {
-        animation: none;
-        text-shadow: none;
-        color: #BE264C;
+        font-size: 9.3vw;
     }
     ${props => props.left && css`
         animation: ${text} 8s infinite linear;
@@ -512,9 +545,6 @@ const ReadyBackground = styled.p`
         color: #BE264C;
         transition: 0.5s;
         text-shadow: 1px 0 #F07A9C, -1px 0 #F07A9C, 0 1px #F07A9C, 0 -1px #F07A9C, 1px 1px #F07A9C, -1px -1px #F07A9C, 1px -1px #F07A9C, -1px 1px #F07A9C;
-        @media screen and (max-width: 600px) {
-            text-shadow: none;
-        }
     }
 `
 
@@ -533,12 +563,11 @@ const ReadyButton = styled.div`
     transition: 0.5s;
     transform: translate(-50%, -50%);
     @media screen and (max-width: 600px) {
-        width: 55%;
+        width: 70%;
         text-align: center;
         line-height: 2;
-        font-size: 5vw;
-        padding: 5% 10%;
-        font-size: calc(10px + 1.7vw);
+        font-size: 6vw;
+        padding: 10% 10%;
     }
     ${Ready}:hover & {
         background-color: #BE264C;
@@ -548,26 +577,39 @@ const ReadyButton = styled.div`
 
 function Index() {
     useEffect(() => {
-        if (window.screen.height / window.screen.width > 1) {
-            document.querySelector('#video').style.height = '30vh'
-            document.querySelector('#hero').style.height = '70vh'
-        }
+        let video = document.querySelector('#video')
+        let hero = document.querySelector('#hero')
+        let slide = document.querySelectorAll('.sliderFirst')
+        let swiper = document.querySelector('#swiper')
 
-        if (window.screen.width <= 600) {
-            setInterval(function () {
+        setInterval(function () {
+            if (window.screen.height / window.screen.width > 1) {
+                video.style.height = '30vh'
+                hero.style.height = '70vh'
+            } else {
+                video.style.height = '100vh'
+                hero.style.height = '100vh'
+            }
+            if (window.screen.width <= 600) {
                 let activeSlide = document.querySelector('.swiper-slide-active')
-                let slide = document.querySelectorAll('.sliderFirst')
                 slide.forEach(element => element.lastChild.style.opacity = "0");
                 activeSlide.lastChild.style.opacity = "1"
-            }, 1000);
-        }
+            } else {
+                slide.forEach(element => element.lastChild.style.opacity = "1");
+            }
+            if (window.screen.width >= 600) {
+                swiper.style.width = '100vw'
+                swiper.style.transform = 'translate(-50%, 0)'
+                swiper.style.position = 'relative'
+                swiper.style.top = '10px'
+            } else {
+                swiper.style.width = '60vw'
+                swiper.style.transform = 'translate(-50%, -45%)'
+                swiper.style.position = 'absolute'
+                swiper.style.top = '50%'
+            }
+        }, 1000);
 
-        if (window.screen.width >= 600) {
-            document.querySelector('#swiper').style.width = '100vw'
-            document.querySelector('#swiper').style.transform = 'translate(-50%, 0)'
-            document.querySelector('#swiper').style.position = 'relative'
-            document.querySelector('#swiper').style.top = '10px'
-        }
     }, [])
 
     return (
@@ -600,38 +642,22 @@ function Index() {
                     <FieldsItem>
                         <FieldsNumber>1</FieldsNumber>
                         <FieldsText>Дизайн</FieldsText>
-                        <FieldsAnimation>
-                            <FieldsSubtext>
-                                Дизайн
-                            </FieldsSubtext>
-                        </FieldsAnimation>
+                        <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
                     <FieldsItem>
                         <FieldsNumber>2</FieldsNumber>
                         <FieldsText>Брендинг</FieldsText>
-                        <FieldsAnimation>
-                            <FieldsSubtext>
-                                Брендинг
-                            </FieldsSubtext>
-                        </FieldsAnimation>
+                        <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
                     <FieldsItem>
                         <FieldsNumber>3</FieldsNumber>
                         <FieldsText>Разработка сайтов</FieldsText>
-                        <FieldsAnimation>
-                            <FieldsSubtext>
-                                Разработка сайтов
-                            </FieldsSubtext>
-                        </FieldsAnimation>
+                        <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
                     <FieldsItem>
                         <FieldsNumber>4</FieldsNumber>
                         <FieldsText>Цифровой маркетинг</FieldsText>
-                        <FieldsAnimation>
-                            <FieldsSubtext>
-                                Цифровой маркетинг
-                            </FieldsSubtext>
-                        </FieldsAnimation>
+                        <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
                 </FieldsContainer>
             </Fields>
@@ -667,25 +693,25 @@ function Index() {
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
                             <BestItem src={example1}></BestItem>
                             <BestDescription className="sliderDescription">
-                                <BestName>Название</BestName>
-                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService>Услуга</BestService>
+                                <BestName className="bestAnimation">Название</BestName>
+                                <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
+                                <BestService className="bestAnimation">Услуга</BestService>
                             </BestDescription>
                         </SwiperSlide>
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
                             <BestItem src={example2}></BestItem>
                             <BestDescription className="sliderDescription">
-                                <BestName>Название</BestName>
-                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService>Услуга</BestService>
+                                <BestName className="bestAnimation">Название</BestName>
+                                <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
+                                <BestService className="bestAnimation">Услуга</BestService>
                             </BestDescription>
                         </SwiperSlide>
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
                             <BestItem src={example3}></BestItem>
                             <BestDescription className="sliderDescription">
-                                <BestName>Название</BestName>
-                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService>Услуга</BestService>
+                                <BestName className="bestAnimation">Название</BestName>
+                                <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
+                                <BestService className="bestAnimation">Услуга</BestService>
                             </BestDescription>
                         </SwiperSlide>
                     </Swiper>
@@ -715,6 +741,7 @@ function Index() {
                 >
                     <SwiperSlide>
                         <FeedbackItem>
+                            <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
                             <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
                             <FeedbackStars>
@@ -730,6 +757,7 @@ function Index() {
                     </SwiperSlide>
                     <SwiperSlide>
                         <FeedbackItem>
+                            <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
                             <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
                             <FeedbackStars>
@@ -745,6 +773,7 @@ function Index() {
                     </SwiperSlide>
                     <SwiperSlide>
                         <FeedbackItem>
+                            <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
                             <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
                             <FeedbackStars>
@@ -760,6 +789,7 @@ function Index() {
                     </SwiperSlide>
                     <SwiperSlide>
                         <FeedbackItem>
+                            <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
                             <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
                             <FeedbackStars>
@@ -775,6 +805,7 @@ function Index() {
                     </SwiperSlide>
                     <SwiperSlide>
                         <FeedbackItem>
+                            <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
                             <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
                             <FeedbackStars>

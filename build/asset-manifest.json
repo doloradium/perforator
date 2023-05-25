@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-gh-pages/static/css/main.3af932c5.css",
-    "main.js": "/react-gh-pages/static/js/main.0de89312.js",
+    "main.js": "/react-gh-pages/static/js/main.5f523f73.js",
     "static/js/787.9dd48fc2.chunk.js": "/react-gh-pages/static/js/787.9dd48fc2.chunk.js",
     "static/media/presentation.mp4": "/react-gh-pages/static/media/presentation.18255e230dec0378f05d.mp4",
     "static/media/example3.jpg": "/react-gh-pages/static/media/example3.4bec9389217151154b7b.jpg",
@@ -9,20 +9,20 @@
     "static/media/example2.jpg": "/react-gh-pages/static/media/example2.ee456779a703cd44dc5b.jpg",
     "static/media/hero.png": "/react-gh-pages/static/media/hero.e6b6c4a9e083214569fd.png",
     "static/media/logo.svg": "/react-gh-pages/static/media/logo.48cdedeaea40c5535a7f03f5b0eaeaf2.svg",
-    "static/media/insta.svg": "/react-gh-pages/static/media/insta.5b632c04a453e000431a2285741a77bc.svg",
-    "static/media/whatsapp.svg": "/react-gh-pages/static/media/whatsapp.c5966661bd919fa713bc8f8ede88a861.svg",
+    "static/media/insta.svg": "/react-gh-pages/static/media/insta.c9bd2b9eceaecaeb5469cc6478f95ca6.svg",
+    "static/media/whatsapp.svg": "/react-gh-pages/static/media/whatsapp.33ba54e4a515658e74381c2971d9d25a.svg",
     "static/media/arrows.svg": "/react-gh-pages/static/media/arrows.7a16e9bdba60cd6b4c024dd6c125cfa0.svg",
-    "static/media/vk.svg": "/react-gh-pages/static/media/vk.2d74af4b116bc8f3fb5594052039402c.svg",
-    "static/media/telegram.svg": "/react-gh-pages/static/media/telegram.0ae132cdcc16cd6956a329415020ff4a.svg",
-    "static/media/youtube.svg": "/react-gh-pages/static/media/youtube.f9508f509b11e5e636e538bc7d069396.svg",
+    "static/media/vk.svg": "/react-gh-pages/static/media/vk.3a7f29ceed6a05a9c526d6cf92a9fc6a.svg",
+    "static/media/telegram.svg": "/react-gh-pages/static/media/telegram.6342705b50b4c6b049034f6619c7976b.svg",
+    "static/media/youtube.svg": "/react-gh-pages/static/media/youtube.8a4d7be3735cab1ce5e45960a2a64d56.svg",
     "index.html": "/react-gh-pages/index.html",
-    "static/media/star.svg": "/react-gh-pages/static/media/star.3c1b4e6d8b7f4e624fe67809c099f72c.svg",
+    "static/media/star.svg": "/react-gh-pages/static/media/star.87dad8641e4dc624cf624c8bbcc352e9.svg",
     "main.3af932c5.css.map": "/react-gh-pages/static/css/main.3af932c5.css.map",
-    "main.0de89312.js.map": "/react-gh-pages/static/js/main.0de89312.js.map",
+    "main.5f523f73.js.map": "/react-gh-pages/static/js/main.5f523f73.js.map",
     "787.9dd48fc2.chunk.js.map": "/react-gh-pages/static/js/787.9dd48fc2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3af932c5.css",
-    "static/js/main.0de89312.js"
+    "static/js/main.5f523f73.js"
   ]
 }

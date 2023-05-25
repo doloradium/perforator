@@ -1,6 +1,9 @@
 import styled from "styled-components"
+import { useEffect } from 'react';
 
 import logo from '../img/logo.svg'
+
+import "../index.css";
 
 const Container = styled.div`
     width: 3.5%; 
@@ -33,8 +36,21 @@ const Logo = styled.img`
 `
 
 function Header() {
+    useEffect(() => {
+        const header = document.querySelector('#header');
+        const toggleClass = "is-sticky";
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 150) {
+                header.classList.add(toggleClass);
+            } else {
+                header.classList.remove(toggleClass);
+            }
+        });
+    }, [])
+
     return (
-        <Wrapper>
+        <Wrapper id="header">
             <Logo src={logo} alt="AO Performance"></Logo>
             <Container id="burger">
                 <Line></Line>

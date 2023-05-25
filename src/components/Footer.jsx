@@ -73,7 +73,6 @@ const PagesImage = styled.img`
 `
 
 const Privacy = styled.a`
-    text-decoration: none;
     color: #FFFFFF;
     font-size: 1.5vw;
     width: 35%;

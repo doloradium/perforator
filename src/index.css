@@ -4,6 +4,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow: overlay;
+  &::-webkit-scrollbar {
+    width: 0.5vw;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 1vh; 
+    background-color: #BE264C;
+  }
 }
 
 code {
@@ -14,4 +23,38 @@ code {
 .sliderFirst:hover .sliderDescription {
   transform: translate(0, 0);
   transition: 0.5s;
+}
+
+.bestAnimation {
+  transform: translate(-200%, 0);
+  transition: 0.6s;
+}
+
+.sliderFirst:hover .bestAnimation {
+  transform: translate(0, 0);
+  transition: 0.6s;
+}
+
+@media screen and (max-width: 600px) {
+  .bestAnimation {
+    transform: translate(0, 0);
+    transition: 0.1s;
+  }
+}
+
+.is-sticky {
+  position: fixed;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  backdrop-filter: blur(10px);
+  animation: slideDown 0.35s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
