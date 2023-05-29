@@ -1,13 +1,14 @@
 import styled, { keyframes, css } from "styled-components"
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
-import React, { useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React from "react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Cross, Line } from '../components/Header'
+
 
 import "swiper/css";
 
 import presentation from '../img/presentation.mp4'
-import hero from '../img/hero.png'
 import arrows from '../img/arrows.svg'
 import example1 from '../img/example1.jpg'
 import example2 from '../img/example2.jpg'
@@ -17,7 +18,6 @@ import commas from '../img/commas.png'
 
 import Header from '../components/Header'
 import Footer from "../components/Footer"
-import SideMenu from "../components/Sidemenu"
 
 const Page = styled.div`
     width: 100%;
@@ -28,7 +28,7 @@ const Page = styled.div`
 
 const Hero = styled.section`
     margin: auto;
-    height: 100vh;
+    height: 80vh;
     position: relative;
 `
 
@@ -77,36 +77,101 @@ const HeroSubheading = styled.h2`
 `
 
 const VideoContainer = styled.video`
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    position: relative;
-`
-
-const VideoSource = styled.source`
-    object-fit: cover;
-`
-
-const PresentationImage = styled.img`
     display: block;
     z-index: 10;
     left: calc(50vw - 7.5%);
     top: -5vw;
     position: absolute;
     width: 15%;
-    height: 10vw;
+    height: 20%;
+    transition: 1s;
+    object-fit: cover;
+    @media screen and (max-width: 600px) {
+        width: 100%;
+        height: 50vh;
+        top: 0;
+        left: 0;
+        position: relative;
+    }
+`
+
+const VideoScreen = styled.div`
+    left: calc(50vw - 7.5%);
+    top: -5vw;
+    width: 15%;
+    height: 20%;
+    transition: 1s;
+    background-color: #BE264C;
+    z-index: 100;
+    position: absolute;
+    mix-blend-mode: multiply;
+    @media screen and (max-width: 600px) {
+        width: 100%;
+        height: 50vh;
+        top: 0;
+        left: 0;
+    }
+`
+
+const VideoSource = styled.source``
+
+const VideoBubble = styled.a`
+    display: none;
+    @media screen and (max-width: 600px) {
+        display: flex;
+        align-items: center;
+        width: 30vw;
+        background-color: #BE264C;
+        height: 30vw;
+        border-radius: 100px;
+        position: absolute;
+        z-index: 101;
+        top: -15vw;
+        left: 35vw;        
+    }
+`
+
+const VideoButton = styled.p`
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: 500;
+
+`
+
+const PresentationImage = styled.div`
+    width: 100%;
+    height: 100vh;
+    background-color: #BE264C;
+    @media screen and (max-width: 600px) {
+        display: none;
+    }
+`
+
+const HiddenContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000000CD;
+    top: 0;
+    lefT: 0;
+    z-index: 1001;
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    transition: 0.5s;
+`
+
+const HiddenVideo = styled.video`
+    width: 60%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
 `
 
 const PresentationBlock = styled.div`
     position: relative;
-`
-
-const PresentationCircle = styled.div`
-
-`
-
-const PresentationText = styled.p`
-
 `
 
 const About = styled.section`
@@ -327,12 +392,13 @@ const BestDescription = styled.div`
     transition: 0.5s;
     position: absolute;
     z-index: 100;
-    background-color: #BE264C80;
     top: 0;
     left: 0;
     height: 85.4%;
     padding: 10%;
     width: 65%;
+    /* mix-blend-mode: multiply; */
+    background-color: #be264c80;
     transform: translate(-100%, 0);
     @media screen and (max-width: 600px) {
         position: relative;
@@ -345,8 +411,20 @@ const BestDescription = styled.div`
     }
 `
 
+const BestScreen = styled.div`
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    /* background-color: #be264c; */
+    mix-blend-mode: multiply;
+    top: 0;
+    left: 0;
+`
+
 const BestName = styled.p`
     color: #FFFFFF;
+    mix-blend-mode: normal;
+    position: relative;
     font-weight: 700;
     font-size: calc(12px + 2.8vw);
     margin-bottom: 3%;
@@ -507,19 +585,19 @@ const ReadyContainer = styled.div`
 
 const text = keyframes`
     0%{
-        transform: translate(-10%, 0);
+        transform: translate(0, 0);
     }
     100%{
-        transform: translate(-60%, 0);
+        transform: translate(-50%, 0);
     }
 `
 
 const textLeft = keyframes`
     0%{
-        transform: translate(-60%, 0);
+        transform: translate(-50%, 0);
     }
     100%{
-        transform: translate(-10%, 0);
+        transform: translate(0, 0);
     }
 `
 
@@ -578,18 +656,14 @@ const ReadyButton = styled.div`
 function Index() {
     useEffect(() => {
         let video = document.querySelector('#video')
-        let hero = document.querySelector('#hero')
         let slide = document.querySelectorAll('.sliderFirst')
         let swiper = document.querySelector('#swiper')
+        let screen = document.querySelector('#screen')
+        let parent = document.querySelector('#parent')
+        let hidden = document.querySelector('#hidden')
+        let crossVideo = document.querySelector('#crossVideo')
 
         setInterval(function () {
-            if (window.screen.height / window.screen.width > 1) {
-                video.style.height = '30vh'
-                hero.style.height = '70vh'
-            } else {
-                video.style.height = '100vh'
-                hero.style.height = '100vh'
-            }
             if (window.screen.width <= 600) {
                 let activeSlide = document.querySelector('.swiper-slide-active')
                 slide.forEach(element => element.lastChild.style.opacity = "0");
@@ -608,25 +682,73 @@ function Index() {
                 swiper.style.position = 'absolute'
                 swiper.style.top = '50%'
             }
-        }, 1000);
+        }, 1000)
 
+        screen.addEventListener("click", () => {
+            document.body.style.overflow = "hidden"
+            parent.style.opacity = '1'
+            parent.style.zIndex = '1001'
+            hidden.play()
+            video.pause()
+        })
+
+        crossVideo.addEventListener("click", () => {
+            document.body.style.overflow = "overlay"
+            parent.style.opacity = '0'
+            parent.style.zIndex = '-1'
+            hidden.pause()
+            video.play()
+        })
+
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset
+            if (currentScroll > 100) {
+                if (window.screen.width > 600) {
+                    video.style.width = '100vw'
+                    video.style.height = '100vh'
+                    video.style.top = '0'
+                    video.style.left = '0'
+                    screen.style.width = '100vw'
+                    screen.style.height = '100vh'
+                    screen.style.top = '0'
+                    screen.style.left = '0'
+                    video.addEventListener("transitionend", () => {
+                        video.play()
+                    })
+                }
+                screen.style.opacity = '0'
+                video.play()
+            }
+        })
     }, [])
 
     return (
         <Page id="page">
             <Hero id="hero">
                 <Header></Header>
-                <SideMenu></SideMenu>
                 <HeroContainer>
                     <HeroSubheading>Клиент — это не цель, а стратегический партнер в достижении успеха</HeroSubheading>
                     <HeroHeading>Добивайтесь новых высот вместе с нами</HeroHeading>
                 </HeroContainer>
             </Hero>
             <PresentationBlock>
-                <PresentationImage id="image" src={hero}></PresentationImage>
-                <VideoContainer id="video" controls='false' autoplay>
+                <HiddenContainer id="parent">
+                    <Cross index transparent id="crossVideo">
+                        <Line cross></Line>
+                        <Line cross></Line>
+                    </Cross>
+                    <HiddenVideo id="hidden" autoplay controls>
+                        <VideoSource src={presentation} type="video/mp4"></VideoSource>
+                    </HiddenVideo>
+                </HiddenContainer>
+                <VideoBubble>
+                    <VideoButton>Видео презентация</VideoButton>
+                </VideoBubble>
+                <VideoContainer id="video" autoplay muted loop>
                     <VideoSource src={presentation} type="video/mp4"></VideoSource>
                 </VideoContainer>
+                <VideoScreen id="screen"></VideoScreen>
+                <PresentationImage id="image"></PresentationImage>
             </PresentationBlock>
             <About>
                 <AboutImage></AboutImage>
@@ -691,8 +813,9 @@ function Index() {
                         }}
                     >
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
-                            <BestItem src={example1}></BestItem>
+                            <BestItem src={example1} style={{ backgroundColor: "#FFFFFF" }}></BestItem>
                             <BestDescription className="sliderDescription">
+                                <BestScreen></BestScreen>
                                 <BestName className="bestAnimation">Название</BestName>
                                 <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
                                 <BestService className="bestAnimation">Услуга</BestService>
@@ -701,6 +824,7 @@ function Index() {
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
                             <BestItem src={example2}></BestItem>
                             <BestDescription className="sliderDescription">
+                                <BestScreen></BestScreen>
                                 <BestName className="bestAnimation">Название</BestName>
                                 <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
                                 <BestService className="bestAnimation">Услуга</BestService>
@@ -709,6 +833,7 @@ function Index() {
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
                             <BestItem src={example3}></BestItem>
                             <BestDescription className="sliderDescription">
+                                <BestScreen></BestScreen>
                                 <BestName className="bestAnimation">Название</BestName>
                                 <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
                                 <BestService className="bestAnimation">Услуга</BestService>

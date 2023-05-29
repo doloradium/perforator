@@ -5,6 +5,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overflow: overlay;
+  height: 100%;
+  width: 100%;
+  margin: 0;
   &::-webkit-scrollbar {
     width: 0.5vw;
     background: transparent;
@@ -13,6 +16,12 @@ body {
     height: 1vh; 
     background-color: #BE264C;
   }
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 code {
@@ -44,9 +53,10 @@ code {
 
 .is-sticky {
   position: fixed;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
-  padding: 8px 0;
-  backdrop-filter: blur(10px);
+  width: 100%;
+  background-color: #121212;
+  z-index: 100;
+  padding: 0;
   animation: slideDown 0.35s ease-out;
 }
 
@@ -57,4 +67,5 @@ code {
   to {
     transform: translateY(0);
   }
-}
+} 
+
