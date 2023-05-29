@@ -168,6 +168,9 @@ const HiddenVideo = styled.video`
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+    @media screen and (max-width: 768px) {
+        width: 90%;
+    }
 `
 
 const PresentationBlock = styled.div`
@@ -397,7 +400,6 @@ const BestDescription = styled.div`
     height: 85.4%;
     padding: 10%;
     width: 65%;
-    /* mix-blend-mode: multiply; */
     background-color: #be264c80;
     transform: translate(-100%, 0);
     @media screen and (max-width: 600px) {
@@ -662,6 +664,7 @@ function Index() {
         let parent = document.querySelector('#parent')
         let hidden = document.querySelector('#hidden')
         let crossVideo = document.querySelector('#crossVideo')
+        let bubble = document.querySelector('#bubble')
 
         setInterval(function () {
             if (window.screen.width <= 600) {
@@ -684,13 +687,23 @@ function Index() {
             }
         }, 1000)
 
-        screen.addEventListener("click", () => {
-            document.body.style.overflow = "hidden"
-            parent.style.opacity = '1'
-            parent.style.zIndex = '1001'
-            hidden.play()
-            video.pause()
-        })
+        if (window.screen.width > 600) {
+            screen.addEventListener("click", () => {
+                document.body.style.overflow = "hidden"
+                parent.style.opacity = '1'
+                parent.style.zIndex = '1001'
+                hidden.play()
+                video.pause()
+            })
+        } else {
+            bubble.addEventListener("click", () => {
+                document.body.style.overflow = "hidden"
+                parent.style.opacity = '1'
+                parent.style.zIndex = '1001'
+                hidden.play()
+                video.pause()
+            })
+        }
 
         crossVideo.addEventListener("click", () => {
             document.body.style.overflow = "overlay"
@@ -741,7 +754,7 @@ function Index() {
                         <VideoSource src={presentation} type="video/mp4"></VideoSource>
                     </HiddenVideo>
                 </HiddenContainer>
-                <VideoBubble>
+                <VideoBubble id='bubble'>
                     <VideoButton>Видео презентация</VideoButton>
                 </VideoBubble>
                 <VideoContainer id="video" autoplay muted loop>
