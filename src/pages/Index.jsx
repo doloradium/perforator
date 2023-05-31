@@ -24,6 +24,9 @@ const Page = styled.div`
     height: 100%;
     background-color: #121212;
     overflow: hidden;
+    @media screen and (max-width: 600px) {
+        background-color: #000000;
+    }
 `
 
 const Hero = styled.section`
@@ -290,6 +293,12 @@ const FieldsContainer = styled.div`
         border-top: 30px solid #121212;
         border-bottom: 30px solid #121212;
         background-clip: padding-box; 
+        @media screen and (max-width: 600px) {
+        border-left: 9.5vw solid #000000;
+        border-right: 9.5vw solid #000000;
+        border-top: 30px solid #000000;
+        border-bottom: 30px solid #000000;
+    }
     }
     &::-webkit-scrollbar-thumb {
         border-left: 9.5vw solid rgba(0, 0, 0, 0);   
@@ -301,10 +310,13 @@ const FieldsContainer = styled.div`
     }
 `
 
-const FieldsItem = styled.div`
+const FieldsItem = styled.a`
     min-width: 25%;
     position: relative;
     overflow: hidden;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
     @media screen and (max-width: 768px) {
         min-width: 60%;
         &:first-child {
@@ -330,7 +342,6 @@ const FieldsAnimation = styled.div`
     transition: 0.8s;
     border: 2px solid #BE264C;
     box-sizing: border-box;
-    cursor: default;
     ${FieldsItem}:hover & {
         transform: translate(0, 0);
         transition: 0.8s;
@@ -347,11 +358,13 @@ const FieldsNumber = styled.div`
     text-align: center;
     font-size: 20vw;
     margin: auto;
-    cursor: default;
     display: block;
     text-shadow: 1px 0 #FFFFFF, -1px 0 #FFFFFF, 0 1px #FFFFFF, 0 -1px #FFFFFF, 1px 1px #FFFFFF, -1px -1px #FFFFFF, 1px -1px #FFFFFF, -1px 1px #FFFFFF;
     @media screen and (max-width: 768px) {
         font-size: 300px;
+    }
+    @media screen and (max-width: 600px) {
+        color: #000000;
     }
 `
 
@@ -364,7 +377,6 @@ const FieldsText = styled.p`
     left: 50%;
     position: absolute;
     transition: 0.2s;
-    cursor: default;
     transform: translate(-50%, -50%);
     ${FieldsItem}:hover & {
         z-index: 100;
@@ -388,6 +400,21 @@ const Best = styled.section`
 
 const BestItem = styled.img`
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    @media screen and (max-width: 600px) {
+        height: auto;
+    }
+`
+
+const SwiperLink = styled.a`
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 900;
 `
 
 const BestDescription = styled.div`
@@ -400,13 +427,9 @@ const BestDescription = styled.div`
     height: 85.4%;
     padding: 10%;
     width: 65%;
-    background-color: #be264c80;
-    transform: translate(-100%, 0);
     @media screen and (max-width: 600px) {
         position: relative;
         width: 100%;
-        background-color: #FFFFFF00;
-        transform: translate(0, 0);
         transition: 0.1s;
         opacity: 0;
         padding: 0;
@@ -416,11 +439,13 @@ const BestDescription = styled.div`
 const BestScreen = styled.div`
     position: absolute;
     height: 100%;
-    width: 100%;
-    /* background-color: #be264c; */
+    width: 85%;
+    background-color: #be264c;
     mix-blend-mode: multiply;
     top: 0;
     left: 0;
+    transition: 0.5s;
+    transform: translateX(-100%);
 `
 
 const BestName = styled.p`
@@ -502,6 +527,9 @@ const FeedbackBackground = styled.div`
     ${FeedbackItem}:hover & {
         opacity: 1;
         transition: 0.3s;
+    }
+    @media screen and (max-width: 600px) {
+        background: linear-gradient(#27151A, #000000);
     }
 `
 
@@ -617,6 +645,7 @@ const ReadyBackground = styled.p`
     text-shadow: 1px 0 #656565, -1px 0 #656565, 0 1px #656565, 0 -1px #656565, 1px 1px #656565, -1px -1px #656565, 1px -1px #656565, -1px 1px #656565;
     @media screen and (max-width: 600px) {
         font-size: 9.3vw;
+        color: #000000;
     }
     ${props => props.left && css`
         animation: ${text} 8s infinite linear;
@@ -648,6 +677,7 @@ const ReadyButton = styled.div`
         line-height: 2;
         font-size: 6vw;
         padding: 10% 10%;
+        background: #000000;
     }
     ${Ready}:hover & {
         background-color: #BE264C;
@@ -691,7 +721,7 @@ function Index() {
             screen.addEventListener("click", () => {
                 document.body.style.overflow = "hidden"
                 parent.style.opacity = '1'
-                parent.style.zIndex = '1001'
+                parent.style.zIndex = '1003'
                 hidden.play()
                 video.pause()
             })
@@ -699,7 +729,7 @@ function Index() {
             bubble.addEventListener("click", () => {
                 document.body.style.overflow = "hidden"
                 parent.style.opacity = '1'
-                parent.style.zIndex = '1001'
+                parent.style.zIndex = '1003'
                 hidden.play()
                 video.pause()
             })
@@ -774,22 +804,22 @@ function Index() {
             <Fields>
                 <ThirdHeading>Четыре ключевые области. Неограниченные возможности</ThirdHeading>
                 <FieldsContainer>
-                    <FieldsItem>
+                    <FieldsItem href='#'>
                         <FieldsNumber>1</FieldsNumber>
                         <FieldsText>Дизайн</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
-                    <FieldsItem>
+                    <FieldsItem href='#'>
                         <FieldsNumber>2</FieldsNumber>
                         <FieldsText>Брендинг</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
-                    <FieldsItem>
+                    <FieldsItem href='#'>
                         <FieldsNumber>3</FieldsNumber>
                         <FieldsText>Разработка сайтов</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
-                    <FieldsItem>
+                    <FieldsItem href='#'>
                         <FieldsNumber>4</FieldsNumber>
                         <FieldsText>Цифровой маркетинг</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
@@ -803,7 +833,7 @@ function Index() {
                         spaceBetween={"7%"}
                         centeredSlides={true}
                         initialSlide={1}
-                        loopedSlides={1}
+                        loopedSlides={3}
                         slidesPerView={1}
                         className="mySwiper"
                         style={{
@@ -826,30 +856,33 @@ function Index() {
                         }}
                     >
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
-                            <BestItem src={example1} style={{ backgroundColor: "#FFFFFF" }}></BestItem>
+                            <SwiperLink href='#'></SwiperLink>
+                            <BestItem src={example1}></BestItem>
+                            <BestScreen className="sliderScreen"></BestScreen>
                             <BestDescription className="sliderDescription">
-                                <BestScreen></BestScreen>
-                                <BestName className="bestAnimation">Название</BestName>
-                                <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService className="bestAnimation">Услуга</BestService>
+                                <BestName>Название</BestName>
+                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
+                                <BestService>Услуга</BestService>
                             </BestDescription>
                         </SwiperSlide>
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
+                            <SwiperLink href='#'></SwiperLink>
                             <BestItem src={example2}></BestItem>
+                            <BestScreen className="sliderScreen"></BestScreen>
                             <BestDescription className="sliderDescription">
-                                <BestScreen></BestScreen>
-                                <BestName className="bestAnimation">Название</BestName>
-                                <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService className="bestAnimation">Услуга</BestService>
+                                <BestName>Название</BestName>
+                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
+                                <BestService>Услуга</BestService>
                             </BestDescription>
                         </SwiperSlide>
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
+                            <SwiperLink href='#'></SwiperLink>
                             <BestItem src={example3}></BestItem>
+                            <BestScreen className="sliderScreen"></BestScreen>
                             <BestDescription className="sliderDescription">
-                                <BestScreen></BestScreen>
-                                <BestName className="bestAnimation">Название</BestName>
-                                <BestParagraph className="bestAnimation">короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService className="bestAnimation">Услуга</BestService>
+                                <BestName>Название</BestName>
+                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
+                                <BestService>Услуга</BestService>
                             </BestDescription>
                         </SwiperSlide>
                     </Swiper>

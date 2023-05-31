@@ -7,11 +7,21 @@ import youtube from '../img/youtube.svg'
 import vk from '../img/vk.svg'
 import insta from '../img/insta.svg'
 import telegram from '../img/telegram.svg'
+import arrows from '../img/arrows.svg'
 
 import "../index.css"
 
 const Wrapper = styled.div`
-    z-index: 1000;
+position: fixed;
+  width: 100%;
+  background-color: #121212;
+  padding: 0;
+  transition: 0.5s;
+  z-index: 1002;
+  transform: translateY(0);
+  @media screen and (max-width: 600px) {
+        background-color: #000000;
+    }
 `
 
 const Burger = styled.div`
@@ -35,10 +45,14 @@ export const Line = styled.span`
         top: 50%;
         left: 0;
         height: 10%;
+        display: block;
+        @media screen and (max-width: 600px) {
+            display: none;
+        }
         &:first-child {
             transform: rotate(45deg)
         }
-        &:last-child {
+        &:nth-child(2) {
             transform: rotate(135deg)
         }
     `}
@@ -47,11 +61,19 @@ export const Line = styled.span`
 const HeaderContainer = styled.section`
     display: flex;
     justify-content: space-between;
-    padding: calc(20px + 1%);
+    padding: calc(5px + 1%) calc(20px + 1%);
     align-items: center;
+    @media screen and (max-width: 600px) {
+        padding: calc(15px + 1%) calc(15px + 1%);
+    }
 `
 
 const Logo = styled.img`
+    min-width: 40px;
+`
+
+const LogoLink = styled.a`
+    display: block;
     width: 3.5%;
     min-width: 40px;
 `
@@ -87,7 +109,9 @@ const BurgerContainer = styled.div`
     justify-content: space-between;
     flex-direction: column;
     padding: calc(30px + 1vw) calc(25px + 1vw);
-
+    @media screen and (max-width: 600px) {
+        background-color: #000000;
+    }
 `
 
 const HeadingContainer = styled.div`
@@ -106,6 +130,9 @@ export const Cross = styled.div`
     justify-content: space-between;
     cursor: pointer;
     min-width: 40px;
+    @media screen and (max-width: 600px) {
+
+    }
     ${props => props.index && css`
         position: absolute;
         z-index: 1001;
@@ -143,6 +170,9 @@ const NavItem = styled.a`
     display: block;
     margin-bottom: 5%;
     text-align: right;
+    @media screen and (max-width: 600px) {
+        font-weight: 700;
+    }
 `
 
 const Socials = styled.div`
@@ -177,23 +207,40 @@ const Mail = styled.a`
     margin: 0;
 `
 
+const Arrows = styled.img`
+    width: 3vw;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    min-width: 30px;
+    display: none;
+    transform: rotate(-90deg);
+    @media screen and (max-width: 600px) {
+        display: block;
+    }
+`
+
 function Header() {
     useEffect(() => {
         let header = document.querySelector('#header')
-        let toggleClass = "is-sticky"
         let burgerButton = document.querySelector('#burger')
         let cross = document.querySelector('#cross')
         let background = document.querySelector('#background')
         let container = document.querySelector('#container')
 
+        let lastScroll = 150
+        let currentScroll = 150
+
         window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset
-            if (currentScroll > 150) {
-                header.classList.add(toggleClass)
+            currentScroll = window.pageYOffset
+            if (currentScroll < lastScroll) {
+                header.style.transform = 'translateY(0)'
             } else {
-                header.classList.remove(toggleClass)
+                header.style.transform = 'translateY(-100%)'
             }
-        });
+            lastScroll = currentScroll
+        })
 
         burgerButton.addEventListener('click', function () {
             container.style.transform = "translate(0, 0)"
@@ -223,7 +270,9 @@ function Header() {
     return (
         <Wrapper id="header">
             <HeaderContainer>
-                <Logo src={logo} alt="AO Performance"></Logo>
+                <LogoLink href="#">
+                    <Logo src={logo} alt="AO Performance"></Logo>
+                </LogoLink>
                 <Burger id="burger">
                     <Line></Line>
                     <Line></Line>
@@ -237,6 +286,7 @@ function Header() {
                         <Cross id="cross">
                             <Line cross></Line>
                             <Line cross></Line>
+                            <Arrows src={arrows}></Arrows>
                         </Cross>
                         <Heading href="#">AO Performance</Heading>
                     </HeadingContainer>
