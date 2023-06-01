@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,14 +7,16 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  &::-webkit-scrollbar {
-    width: 0.5vw;
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 1vh; 
-    background-color: #BE264C;
-  }
+}
+
+body::-webkit-scrollbar {
+  width: 0.5vw;
+  background-color: #121212;
+}
+
+body::-webkit-scrollbar-thumb {
+  height: 1vh; 
+  background-color: #BE264C;
 }
 
 html {
@@ -53,5 +54,5 @@ code {
 
   .sliderScreen {
     display: none;
-  }
+  }  
 }

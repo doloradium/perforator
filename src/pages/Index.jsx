@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 
 import React from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Cross, Line } from '../components/Header'
+import { Line } from '../components/Header'
+import { Cross } from "../components/Sidemenu"
 
 
 import "swiper/css";
@@ -18,6 +19,7 @@ import commas from '../img/commas.png'
 
 import Header from '../components/Header'
 import Footer from "../components/Footer"
+import Sidemenu from "../components/Sidemenu"
 
 const Page = styled.div`
     width: 100%;
@@ -107,6 +109,7 @@ const VideoScreen = styled.div`
     background-color: #BE264C;
     z-index: 100;
     position: absolute;
+    cursor: pointer;
     mix-blend-mode: multiply;
     @media screen and (max-width: 600px) {
         width: 100%;
@@ -743,6 +746,14 @@ function Index() {
             video.play()
         })
 
+        parent.addEventListener("click", () => {
+            document.body.style.overflow = "overlay"
+            parent.style.opacity = '0'
+            parent.style.zIndex = '-1'
+            hidden.pause()
+            video.play()
+        })
+
         window.addEventListener("scroll", () => {
             const currentScroll = window.pageYOffset
             if (currentScroll > 100) {
@@ -767,6 +778,7 @@ function Index() {
 
     return (
         <Page id="page">
+            <Sidemenu></Sidemenu>
             <Hero id="hero">
                 <Header></Header>
                 <HeroContainer>
@@ -777,8 +789,8 @@ function Index() {
             <PresentationBlock>
                 <HiddenContainer id="parent">
                     <Cross index transparent id="crossVideo">
-                        <Line cross></Line>
-                        <Line cross></Line>
+                        <Line video></Line>
+                        <Line video></Line>
                     </Cross>
                     <HiddenVideo id="hidden" autoplay controls>
                         <VideoSource src={presentation} type="video/mp4"></VideoSource>
