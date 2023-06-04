@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import { Link } from "react-router-dom"
 
 import logo from '../img/logo.svg'
 
@@ -79,7 +80,7 @@ const Logo = styled.img`
     min-width: 40px;
 `
 
-const LogoLink = styled.a`
+const LogoLink = styled(Link)`
     display: block;
     width: 3.5%;
     min-width: 40px;
@@ -120,7 +121,7 @@ function Header() {
     return (
         <Wrapper id="header">
             <HeaderContainer>
-                <LogoLink href="#">
+                <LogoLink to="/">
                     <Logo src={logo} alt="AO Performance"></Logo>
                 </LogoLink>
                 <Burger id="burger">

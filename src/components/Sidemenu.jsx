@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
 import { useEffect } from 'react'
+import { Link } from "react-router-dom"
 
 import { Line } from "./Header"
 
@@ -79,7 +80,7 @@ export const Cross = styled.div`
     `}
 `
 
-const Heading = styled.a`
+const Heading = styled(Link)`
     margin: 0;
     text-decoration: none;
     color: #FFFFFF;
@@ -94,7 +95,7 @@ const NavPanel = styled.nav`
     justify-content: space-between;
 `
 
-const NavItem = styled.a`
+const NavItem = styled(Link)`
     text-decoration: none;
     color: #BE264C;
     font-size: calc(26px + 0.5vw);
@@ -115,7 +116,7 @@ const Socials = styled.div`
     margin: 0 auto 0 0;
 `
 
-const SocialsItem = styled.a`
+const SocialsItem = styled(Link)`
     width: 4vw;
     min-width: 50px;
     display: block;
@@ -158,6 +159,7 @@ function Sidemenu() {
         let background = document.querySelector('#background')
         let container = document.querySelector('#container')
         let header = document.querySelector('#header')
+        let itemArray = document.querySelectorAll('.navItem')
 
         cross.addEventListener('click', function () {
             container.style.transform = "translate(100%, 0)"
@@ -166,6 +168,17 @@ function Sidemenu() {
             background.style.zIndex = "-1"
             document.body.style.overflow = "overlay"
             header.style.transform = 'translateY(0)'
+        })
+
+        itemArray.forEach((item) => {
+            item.addEventListener('click', function () {
+                container.style.transform = "translate(100%, 0)"
+                background.style.display = "none"
+                background.style.opacity = "0"
+                background.style.zIndex = "-1"
+                document.body.style.overflow = "overlay"
+                header.style.transform = 'translateY(0)'
+            })
         })
 
         setInterval(function () {
@@ -187,29 +200,29 @@ function Sidemenu() {
                         <Line cross></Line>
                         <Arrows src={arrows}></Arrows>
                     </Cross>
-                    <Heading href="#">AO Performance</Heading>
+                    <Heading to='/'>AO Performance</Heading>
                 </HeadingContainer>
                 <NavPanel>
-                    <NavItem href="#">О нас</NavItem>
-                    <NavItem href="#">Услуги</NavItem>
-                    <NavItem href="#">Команда</NavItem>
-                    <NavItem href="#">Контакты</NavItem>
-                    <NavItem href="#">Кейсы</NavItem>
+                    <NavItem className="navItem" to='/'>О нас</NavItem>
+                    <NavItem className="navItem" to='/'>Услуги</NavItem>
+                    <NavItem className="navItem" to='/'>Команда</NavItem>
+                    <NavItem className="navItem" to='/contacts'>Контакты</NavItem>
+                    <NavItem className="navItem" to='/'>Кейсы</NavItem>
                 </NavPanel>
                 <Socials>
-                    <SocialsItem href="#">
+                    <SocialsItem to='/'>
                         <SocialsIcon src={insta}></SocialsIcon>
                     </SocialsItem>
-                    <SocialsItem href="#">
+                    <SocialsItem to='/'>
                         <SocialsIcon src={telegram}></SocialsIcon>
                     </SocialsItem>
-                    <SocialsItem href="#">
+                    <SocialsItem to='/'>
                         <SocialsIcon src={youtube}></SocialsIcon>
                     </SocialsItem>
-                    <SocialsItem href="#">
+                    <SocialsItem to='/'>
                         <SocialsIcon src={vk}></SocialsIcon>
                     </SocialsItem>
-                    <SocialsItem href="#">
+                    <SocialsItem to='/'>
                         <SocialsIcon src={whatsapp}></SocialsIcon>
                     </SocialsItem>
                 </Socials>

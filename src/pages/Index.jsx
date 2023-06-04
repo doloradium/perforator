@@ -1,11 +1,11 @@
 import styled, { keyframes, css } from "styled-components"
 import { useEffect } from 'react'
+import { Link } from "react-router-dom"
 
 import React from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Line } from '../components/Header'
 import { Cross } from "../components/Sidemenu"
-
 
 import "swiper/css";
 
@@ -16,6 +16,7 @@ import example2 from '../img/example2.jpg'
 import example3 from '../img/example3.jpg'
 import star from '../img/star.svg'
 import commas from '../img/commas.png'
+import aboutImage from '../img/aboutImage.jpg'
 
 import Header from '../components/Header'
 import Footer from "../components/Footer"
@@ -43,10 +44,10 @@ const HeroContainer = styled.div`
     height: fit-content;
     position: absolute;
     top: 50%;
-    transform: translate(0, -50%)
+    transform: translate(0, -50%);
 `
 
-const HeroHeading = styled.h1`
+export const HeroHeading = styled.h1`
     color: #FFFFFF;
     font-size: 3.5vw;
     text-align: center;
@@ -54,6 +55,16 @@ const HeroHeading = styled.h1`
     padding: 0 20%;
     max-width: 60%;
     margin: auto;
+    ${props => props.wide && css`
+        max-width: 100%;
+        padding: 0;
+        @media screen and (max-width: 768px) {
+            max-width: 100%;
+        }   
+        @media screen and (max-width: 576px) {
+            max-width: 100%;
+        }
+    `}
     @media screen and (max-width: 768px) {
         font-size: calc(12px + 2.5vw);
         padding: 0 23%;
@@ -66,7 +77,7 @@ const HeroHeading = styled.h1`
     }
 `
 
-const HeroSubheading = styled.h2`
+export const HeroSubheading = styled.h2`
     color: #121212;
     font-size: 3.5vw;
     text-shadow: 1px 0 #FFFFFF, -1px 0 #FFFFFF, 0 1px #FFFFFF, 0 -1px #FFFFFF, 1px 1px #FFFFFF, -1px -1px #FFFFFF, 1px -1px #FFFFFF, -1px 1px #FFFFFF;
@@ -75,6 +86,9 @@ const HeroSubheading = styled.h2`
     font-weight: 700;
     padding: 0 10%;
     max-width: 80%;
+    ${props => props.noMargin && css`
+        margin: 0;
+    `}
     @media screen and (max-width: 768px) {
         font-size: calc(12px + 2.5vw);
         max-width: 100%;
@@ -187,11 +201,13 @@ const About = styled.section`
     padding: 15% 3%;    
 `
 
-const AboutImage = styled.div`
+const AboutImage = styled.img`
     max-width: 450px;
     width: 90%;
     max-height: 600px;
     height: 65vh;
+    display: block;
+    object-fit: cover;
     background-color: #BE264C;
     margin: 0 auto calc(30px + 2%);
 `
@@ -410,7 +426,7 @@ const BestItem = styled.img`
     }
 `
 
-const SwiperLink = styled.a`
+const SwiperLink = styled(Link)`
     display: block;
     height: 100%;
     width: 100%;
@@ -514,7 +530,11 @@ const FeedbackItem = styled.div`
     border: 2px solid #BE264C;
     padding: 8% 8% 8%;
     position: relative;
+    height: 100%;
     cursor: default;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
 
 const FeedbackBackground = styled.div`
@@ -589,7 +609,7 @@ const FeedbackOccupation = styled.div`
     }
 `
 
-const Ready = styled.a`
+const Ready = styled(Link)`
     margin: auto;
     max-width: 80%;
     border: 2px solid #BE264C;
@@ -698,27 +718,39 @@ function Index() {
         let hidden = document.querySelector('#hidden')
         let crossVideo = document.querySelector('#crossVideo')
         let bubble = document.querySelector('#bubble')
+        let itemArray = document.querySelectorAll('.itemSort')
 
         setInterval(function () {
-            if (window.screen.width <= 600) {
-                let activeSlide = document.querySelector('.swiper-slide-active')
-                slide.forEach(element => element.lastChild.style.opacity = "0");
-                activeSlide.lastChild.style.opacity = "1"
-            } else {
-                slide.forEach(element => element.lastChild.style.opacity = "1");
-            }
-            if (window.screen.width >= 600) {
-                swiper.style.width = '100vw'
-                swiper.style.transform = 'translate(-50%, 0)'
-                swiper.style.position = 'relative'
-                swiper.style.top = '10px'
-            } else {
-                swiper.style.width = '60vw'
-                swiper.style.transform = 'translate(-50%, -45%)'
-                swiper.style.position = 'absolute'
-                swiper.style.top = '50%'
+            if (document.querySelector('.swiper-slide-active') !== null) {
+                if (window.screen.width <= 600) {
+                    let activeSlide = document.querySelector('.swiper-slide-active')
+                    slide.forEach(element => element.lastChild.style.opacity = "0");
+                    activeSlide.lastChild.style.opacity = "1"
+                } else {
+                    slide.forEach(element => element.lastChild.style.opacity = "1");
+                }
+                if (window.screen.width >= 600) {
+                    swiper.style.width = '100vw'
+                    swiper.style.transform = 'translate(-50%, 0)'
+                    swiper.style.position = 'relative'
+                    swiper.style.top = '10px'
+                } else {
+                    swiper.style.width = '60vw'
+                    swiper.style.transform = 'translate(-50%, -45%)'
+                    swiper.style.position = 'absolute'
+                    swiper.style.top = '50%'
+                }
             }
         }, 1000)
+
+        let result = 0
+        itemArray.forEach((item) => {
+            if (item.offsetHeight > result) result = item.offsetHeight
+        })
+        let final = result * 0.9 + 'px'
+        itemArray.forEach((item) => {
+            item.style.height = final
+        })
 
         if (window.screen.width > 600) {
             screen.addEventListener("click", () => {
@@ -806,9 +838,9 @@ function Index() {
                 <PresentationImage id="image"></PresentationImage>
             </PresentationBlock>
             <About>
-                <AboutImage></AboutImage>
+                <AboutImage src={aboutImage}></AboutImage>
                 <AboutText>Одной из главных причин успеха AO-Performance является использование современных технологий и инновационных подходов в работе. Мы постоянно совершенствуем свои знания и умения, чтобы оставаться на переднем крае развития IT-отрасли.</AboutText>
-                <AboutLink href="#">
+                <AboutLink to='/'>
                     <AboutButton>О нас</AboutButton>
                     <AboutArrows src={arrows}></AboutArrows>
                 </AboutLink>
@@ -816,22 +848,22 @@ function Index() {
             <Fields>
                 <ThirdHeading>Четыре ключевые области. Неограниченные возможности</ThirdHeading>
                 <FieldsContainer>
-                    <FieldsItem href='#'>
+                    <FieldsItem to='/'>
                         <FieldsNumber>1</FieldsNumber>
                         <FieldsText>Дизайн</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
-                    <FieldsItem href='#'>
+                    <FieldsItem to='/'>
                         <FieldsNumber>2</FieldsNumber>
                         <FieldsText>Брендинг</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
-                    <FieldsItem href='#'>
+                    <FieldsItem to='/'>
                         <FieldsNumber>3</FieldsNumber>
                         <FieldsText>Разработка сайтов</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
                     </FieldsItem>
-                    <FieldsItem href='#'>
+                    <FieldsItem to='/'>
                         <FieldsNumber>4</FieldsNumber>
                         <FieldsText>Цифровой маркетинг</FieldsText>
                         <FieldsAnimation></FieldsAnimation>
@@ -868,33 +900,33 @@ function Index() {
                         }}
                     >
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
-                            <SwiperLink href='#'></SwiperLink>
+                            <SwiperLink to='/cases/cult'></SwiperLink>
                             <BestItem src={example1}></BestItem>
                             <BestScreen className="sliderScreen"></BestScreen>
                             <BestDescription className="sliderDescription">
-                                <BestName>Название</BestName>
-                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService>Услуга</BestService>
+                                <BestName>CULT</BestName>
+                                <BestParagraph>Дизайн и вёрстка журнала о музыке</BestParagraph>
+                                <BestService>Дизайн журнала</BestService>
                             </BestDescription>
                         </SwiperSlide>
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
-                            <SwiperLink href='#'></SwiperLink>
+                            <SwiperLink to='/cases/college'></SwiperLink>
                             <BestItem src={example2}></BestItem>
                             <BestScreen className="sliderScreen"></BestScreen>
                             <BestDescription className="sliderDescription">
-                                <BestName>Название</BestName>
-                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService>Услуга</BestService>
+                                <BestName>Лендинг</BestName>
+                                <BestParagraph>Разработка леендинга для техникума</BestParagraph>
+                                <BestService>Создание лендинга</BestService>
                             </BestDescription>
                         </SwiperSlide>
                         <SwiperSlide style={{ position: "relative", overflow: "hidden" }} className="sliderFirst">
-                            <SwiperLink href='#'></SwiperLink>
+                            <SwiperLink to='/cases/inside'></SwiperLink>
                             <BestItem src={example3}></BestItem>
                             <BestScreen className="sliderScreen"></BestScreen>
                             <BestDescription className="sliderDescription">
-                                <BestName>Название</BestName>
-                                <BestParagraph>короткое описание услуги с переходом на кейс</BestParagraph>
-                                <BestService>Услуга</BestService>
+                                <BestName>inside</BestName>
+                                <BestParagraph>Дизайн и вёрстка журнала inside</BestParagraph>
+                                <BestService>Дизайн журнала</BestService>
                             </BestDescription>
                         </SwiperSlide>
                     </Swiper>
@@ -922,11 +954,11 @@ function Index() {
                         },
                     }}
                 >
-                    <SwiperSlide>
-                        <FeedbackItem>
+                    <SwiperSlide style={{ height: "100%" }}>
+                        <FeedbackItem className="itemSort">
                             <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
-                            <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
+                            <FeedbackText>Рекомендую работу дизайнеров на примере нашего журнала CULT. Красивый, яркий, отлично видны и структурированы секции, работа сделана на высшем уровне.</FeedbackText>
                             <FeedbackStars>
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
@@ -934,15 +966,15 @@ function Index() {
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
                             </FeedbackStars>
-                            <FeedbackName>Саймон говорит</FeedbackName>
-                            <FeedbackOccupation>Айти додик</FeedbackOccupation>
+                            <FeedbackName>Василий Гладков</FeedbackName>
+                            <FeedbackOccupation>Журнал CULT</FeedbackOccupation>
                         </FeedbackItem>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <FeedbackItem>
+                        <FeedbackItem className="itemSort">
                             <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
-                            <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
+                            <FeedbackText>Очень хорошая компания. Хорошо выполняют свою работу. Дизайны , которые они создают, мне очень нравятся. И по цене очень адекватно. Спасибо большое за вашу работу!</FeedbackText>
                             <FeedbackStars>
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
@@ -950,15 +982,15 @@ function Index() {
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
                             </FeedbackStars>
-                            <FeedbackName>Саймон говорит</FeedbackName>
-                            <FeedbackOccupation>Айти додик</FeedbackOccupation>
+                            <FeedbackName>Алёна Маркарян</FeedbackName>
+                            <FeedbackOccupation>Журнал inside</FeedbackOccupation>
                         </FeedbackItem>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <FeedbackItem>
+                        <FeedbackItem className="itemSort">
                             <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
-                            <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
+                            <FeedbackText>Быстро, качественно и без лишних разговоров! Была необходимость логотип сделать в 3D. Работой очень довольны, будем обращаться снова при необходимости.</FeedbackText>
                             <FeedbackStars>
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
@@ -966,15 +998,15 @@ function Index() {
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
                             </FeedbackStars>
-                            <FeedbackName>Саймон говорит</FeedbackName>
-                            <FeedbackOccupation>Айти додик</FeedbackOccupation>
+                            <FeedbackName>Иван Кравченко</FeedbackName>
+                            <FeedbackOccupation>Факультет рекламы</FeedbackOccupation>
                         </FeedbackItem>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <FeedbackItem>
+                        <FeedbackItem className="itemSort" id='aboba'>
                             <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
-                            <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
+                            <FeedbackText>Ребята молодцы. Быстрое реагирование на поставленные задачи. Профессионально, с индивидуальным подходом. Рекомендую!</FeedbackText>
                             <FeedbackStars>
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
@@ -982,15 +1014,15 @@ function Index() {
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
                             </FeedbackStars>
-                            <FeedbackName>Саймон говорит</FeedbackName>
-                            <FeedbackOccupation>Айти додик</FeedbackOccupation>
+                            <FeedbackName>Сергей Петров</FeedbackName>
+                            <FeedbackOccupation>Бюро ДОМЪ</FeedbackOccupation>
                         </FeedbackItem>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <FeedbackItem>
+                        <FeedbackItem className="itemSort">
                             <FeedbackBackground></FeedbackBackground>
                             <Commas src={commas}></Commas>
-                            <FeedbackText>оаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоыоаиоыиполыиоывиовыиолиывоивыоимловыимовыимовыимоывимодвыимолывимовимоы</FeedbackText>
+                            <FeedbackText>Компании, которые добросовестно и качественно исполняют заказы, важно заметить также - за вполне доступную цену, встречаются нечасто. </FeedbackText>
                             <FeedbackStars>
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
@@ -998,13 +1030,13 @@ function Index() {
                                 <Star src={star}></Star>
                                 <Star src={star}></Star>
                             </FeedbackStars>
-                            <FeedbackName>Саймон говорит</FeedbackName>
-                            <FeedbackOccupation>Айти додик</FeedbackOccupation>
+                            <FeedbackName>Екатерина Данилова</FeedbackName>
+                            <FeedbackOccupation>Журнал PLANTS</FeedbackOccupation>
                         </FeedbackItem>
                     </SwiperSlide>
                 </Swiper>
             </Feedback>
-            <Ready href="#">
+            <Ready to='/contacts'>
                 <ReadyContainer>
                     <ReadyBackground left>Готовы рассказать свою историю? Готовы рассказать свою историю?</ReadyBackground>
                     <ReadyBackground>Готовы рассказать свою историю? Готовы рассказать свою историю?</ReadyBackground>

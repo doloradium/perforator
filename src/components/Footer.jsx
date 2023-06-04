@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+import { Link } from "react-router-dom"
 
 import { ThirdHeading } from "../pages/Index"
 
@@ -11,6 +12,8 @@ import telegram from '../img/telegram.svg'
 const Wrapper = styled.div`
     margin: 0 auto 3%;
     width: 80%;
+    flex-shrink: 0;
+    margin-top: auto;
     @media screen and (max-width: 600px) {
         margin-bottom: 8%;
     }
@@ -49,7 +52,7 @@ const Pages = styled.div`
     `}
 `
 
-const PagesItem = styled.a`
+const PagesItem = styled(Link)`
     text-decoration: none;
     color: #BE264C;
     font-size: 2.25vw;
@@ -72,7 +75,7 @@ const PagesImage = styled.img`
     }
 `
 
-const Privacy = styled.a`
+const Privacy = styled(Link)`
     color: #FFFFFF;
     font-size: 1.5vw;
     width: 35%;
@@ -141,30 +144,30 @@ function Footer() {
                     <ThirdHeading left>AO PERFORMANCE</ThirdHeading>
                     <LinksContainer>
                         <Pages>
-                            <PagesItem href="#">Контакты</PagesItem>
-                            <PagesItem href="#">Команда</PagesItem>
-                            <PagesItem href="#">Услуги</PagesItem>
-                            <PagesItem href="#">Кейсы</PagesItem>
-                            <PagesItem href="#">О нас</PagesItem>
+                            <PagesItem to='/contacts'>Контакты</PagesItem>
+                            <PagesItem to='/'>Команда</PagesItem>
+                            <PagesItem to='/'>Услуги</PagesItem>
+                            <PagesItem to='/'>Кейсы</PagesItem>
+                            <PagesItem to='/'>О нас</PagesItem>
                         </Pages>
                         <Mail href="mailto:aoperformance@mail.ru">aoperformance@mail.ru</Mail>
                     </LinksContainer>
                 </Container>
                 <Container smaller>
                     <Pages socials>
-                        <PagesItem icon href="#">
+                        <PagesItem icon to='/'>
                             <PagesImage src={insta}></PagesImage>
                         </PagesItem>
-                        <PagesItem icon href="#">
+                        <PagesItem icon to='/'>
                             <PagesImage src={youtube}></PagesImage>
                         </PagesItem>
-                        <PagesItem icon href="#">
+                        <PagesItem icon to='/'>
                             <PagesImage src={vk}></PagesImage>
                         </PagesItem>
-                        <PagesItem icon href="#">
+                        <PagesItem icon to='/'>
                             <PagesImage src={telegram}></PagesImage>
                         </PagesItem>
-                        <PagesItem icon href="#">
+                        <PagesItem icon to='/'>
                             <PagesImage src={whatsapp}></PagesImage>
                         </PagesItem>
                     </Pages>
@@ -173,7 +176,7 @@ function Footer() {
             <BottomContainer>
                 <Paragraph>©️ 2023 AO PERFORMANCE,
                     Все права защищены</Paragraph>
-                <Privacy href="#">Политика конфиденциальности</Privacy>
+                <Privacy to='/'>Политика конфиденциальности</Privacy>
             </BottomContainer>
         </Wrapper>
     )
